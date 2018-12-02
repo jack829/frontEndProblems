@@ -1,0 +1,20 @@
+{
+  "name": "mediumfeinterview",
+  "version": "1.0.0",
+  "description": "This is for problems from https://blog.webf.zone/front-end-javascript-interviews-in-2018-19-e17b0b10514",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "express": "^4.16.4"
+  },
+  "devDependencies": {
+    "webpack": "^4.26.1",
+    "webpack-cli": "^3.1.2"
+  }
+}
