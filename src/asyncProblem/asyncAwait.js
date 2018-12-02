@@ -5,12 +5,11 @@ export async function getStudentsAndScoresFromClassroom(id = 75) {
   try {
     const students = await getStudentsAsync()
     const studentsInClassroom = students.filter((student) => student.classroomId === id)
-    const evaluations = await new Promise((resolve, reject) => {
-      let receivedEvals = 0
-      studentsInClassroom.reduce(async (previousPromise, student) => {
+    const evaluations = await studentsInClassroom.reduce(async (previousPromise, student) => {
+        // Because of the async calls in here, we must wait for each to finish otherwise the accumulator will be a Promise
+        // after the first iteration
         const summaryArray = await previousPromise
         const studentEvals = await getEvaluationsByStudent(student.id)
-        receivedEvals++
 
         const calculated = {
           name: student.name,
@@ -20,10 +19,9 @@ export async function getStudentsAndScoresFromClassroom(id = 75) {
 
         summaryArray.push(calculated)
 
-        if (receivedEvals === studentsInClassroom.length) resolve(summaryArray)
         return summaryArray
       }, Promise.resolve([]))
-    })
+
     console.log('evaluations ', evaluations)
   } catch (err) {
     console.log('Error with students ', err)
