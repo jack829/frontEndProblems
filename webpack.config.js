@@ -12,6 +12,9 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
   },
   devtool: 'inline-source-maps',
+  devServer: {
+    contentBase: './dist',
+  },
   module: {
     rules: [
       {
